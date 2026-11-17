@@ -10,7 +10,7 @@
 
 ## 2. Phần việc phụ trách
 
-Em phụ trách vai trò **Evaluation, Benchmark, Testing & Research Lead** của nhóm:
+Em phụ trách vai trò **Evaluation, Benchmark, Testing & Research ** của nhóm:
 
 - Thiết lập kế hoạch và thực hiện quy trình kiểm thử (Testing), đo lường chuẩn hóa (Benchmark) và đánh giá độ bền vững (Durability & Crash Safety) trên cả 4 kiến trúc (*shapes*): `workflow`, `single`, `orchestrator`, `swarm`.
 - Thực hiện kiểm chứng cổng host gate (`pytest -q`), ma trận kiểm thử sinh viên T01–T14 (`pytest -m student`) và bộ kịch bản sự cố crash suite 20 điểm (`lab8.crash_test`).
