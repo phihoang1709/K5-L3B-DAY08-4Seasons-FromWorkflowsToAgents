@@ -7,7 +7,7 @@ Tối đa 5 trang ngoài phụ lục. Số liệu lấy từ file trong `src/rep
 - Tên nhóm: 4Seasons
 - Lớp: L3B
 - Repo nhóm: `https://github.com/phihoang1709/K5-L3B-DAY08-4Seasons-FromWorkflowsToAgents`
-- Thành viên: xem `TEAM.md` (Nguyễn Phi Hoàng - 2A202603952, Trần Xuân Lộc - 2A202603951)
+- Thành viên: xem `TEAM.md` 
 - Commit chốt (trùng `report/team/decision_adr.md`): `631fe8a`
 
 ## 2. Mục tiêu và cách tiếp cận
