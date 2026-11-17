@@ -32,7 +32,8 @@ Quyết định kiến trúc và lý do: xem `report/team/decision_adr.md`. Phi�
 
 Lỗi gặp phải (kèm lệnh, output hoặc ảnh chụp) và cách nhóm xử lý.
 
-...
+- **Môi trường Windows thiếu pytest/pyyaml (phihoang1709):** máy phát triển không có pytest trong Python mặc định (`No module named pytest`) và `conftest.py` import `yaml` fail (`ModuleNotFoundError: No module named 'yaml'`) khi chạy gate từ `src/`. Xử lý: `python -m pip install pytest pyyaml` rồi chạy lại từ `src/`: `python -m pytest -q`, `python -m pytest -q -m student -o addopts= -k workflow`. Đề xuất cho nhóm: thống nhất môi trường (venv + `requirements-dev.txt`) để mọi máy chạy cùng bộ test.
+- *(Điền thêm các khó khăn khác của nhóm nếu có.)*
 
 ## 6. Tổng hợp đóng góp
 
