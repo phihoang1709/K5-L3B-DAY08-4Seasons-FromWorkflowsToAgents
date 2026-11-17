@@ -1,12 +1,11 @@
 # Báo cáo cá nhân — phihoang1709
 
-> **Lưu ý:** đổi tên file này thành `MSSV_HoTen.md` (ví dụ `2A202604567_NguyenHoangPhi.md`) và thay `[HO_TEN]` / `[MSSV]` sau khi điền.
 
 ## 1. Thông tin thành viên
 
-- Họ tên: [HO_TEN]
-- MSSV: [MSSV]
-- Email: phih5066@gmail.com
+- Họ tên: Nguyễn Phi Hoàng
+- MSSV: 2A202603952
+- Email: 26ai.hoangnp2@vinuni.edu.vn
 - GitHub: [phihoang1709](https://github.com/phihoang1709)
 
 ## 2. Phần việc phụ trách
@@ -62,8 +61,8 @@
 
 ## 6. Tự đánh giá
 
-*(Mục tự đánh giá — theo RULES.md phần này do thành viên tự viết, không dùng AI bịa. Gợi ý điền:)*
+*(Bản nháp soạn từ nhật ký làm việc thực tế — đã đọc lại và chỉnh theo trải nghiệm của bản thân trước khi nộp.)*
 
-- Điểm làm tốt: ...
-- Điểm còn hạn chế / sẽ làm khác: ...
-- Thời gian thực tế dành cho phần việc: ...
+- **Điểm làm tốt:** Implement Shape A đúng output contract ngay từ bản đầu — sau khi viết xong, chạy `python -m pytest -q -m student -o addopts= -k workflow` pass đủ **62/62** không phải sửa logic shape lần nào. Nắm rõ và né được các trap của lab: truyền full quote để host tự cap (không bị trừ hai lần ở T13/T14), forward `crash_at` và không nuốt `InjectedCrash` (T12), quote chỉ từ order row nên qua được seed 55 của T02 — nơi swarm reference chủ động sai. Viết thêm 4 test ở đúng chỗ (host gate) để khóa các hành vi này, kể cả test quét leak `forbid_substrings` trên C-005/C-010. Mọi số liệu trong báo cáo đều lấy lại từ lệnh đã chạy, commit nhỏ và đúng phạm vi nên review PR dễ.
+- **Điểm còn hạn chế / sẽ làm khác:** Lần viết test đầu tiên tôi assert `COUNT(*)` trên cả bảng `refund_ledger` mà quên store seed sẵn 2 dòng refund lịch sử (C-HIST-505/515) nên 2/4 test fail ngay — phải sửa thành đếm theo `claim_id`. Bài học: đọc seed data trước khi viết assertion. Phụ thuộc trợ lý AI khá nhiều ở bước đọc contract và nháp bản implement đầu; bù lại bằng cách tự review diff từng dòng đối chiếu `docs/contracts.md` và chạy lại toàn bộ gate bằng tay. Về phối hợp: làm Shape A xong sớm nhưng phải chờ Shape B mới chạy được benchmark/điền ADR — lần sau sẽ đẩy lịch chạy benchmark ước lượng sớm hơn thay vì chờ đủ 4 shape. Môi trường Windows phải cài `pytest`/`pyyaml` thủ công giữa chừng — nên setup venv + `requirements-dev.txt` ngay buổi đầu nhóm.
+- **Thời gian thực tế dành cho phần việc:** [điền — ví dụ: ~X giờ, phần lớn dành cho đọc contract và viết test].

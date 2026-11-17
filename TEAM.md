@@ -2,17 +2,18 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A
-- Repo nhóm: `K5-L3A-DAY08-TenNhom-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
+- Tên nhóm: 4Seasons
+- Lớp: L3B
+- Repo nhóm: `https://github.com/phihoang1709/K5-L3B-DAY08-4Seasons-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
 - URL repo, nhánh nộp, commit chốt:
 
 ## Thành viên
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
-| --: | ------ | ---- | ----- | ------ | ------- |
-|   1 | [HO_TEN] | [MSSV] | phih5066@gmail.com | phihoang1709 | Workflow (Shape A) + Integration |
+| --- | --- | --- | --- | --- | --- |
+|   1 | Nguyễn Phi Hoàng | 2A202603952 | 26ai.hoangnp2@vinuni.edu.vn | phihoang1709 | Workflow (Shape A) + Integration |
 |   2 | Trần Xuân Lộc | 2A202603951 | 26ai.loctx2@vinuni.edu.vn | Kaylez-TXL | Orchestrator (Shape C) |
+
 
 Gợi ý chia vai:
 
@@ -40,7 +41,7 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 
 Sao chép mục dưới đây cho từng thành viên.
 
-## phihoang1709
+## 2A202603952_NguyenPhiHoang
 
 ### Phần việc phụ trách
 
@@ -52,7 +53,7 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Bằng chứng
 
-- `python -m pytest -q -m student -o addopts= -k workflow` → 62 passed; host gate sau merge → 61 passed; `check_submission`: `[ OK ] shape workflow: 12/12 claim public pass ở seed 11`. Chi tiết: `report/team/phihoang1709.md`.
+- `python -m pytest -q -m student -o addopts= -k workflow` → 62 passed; host gate sau merge → 61 passed; `check_submission`: `[ OK ] shape workflow: 12/12 claim public pass ở seed 11`. Chi tiết: `report/team/2A202603952_NguyenPhiHoang.md`.
 
 ## MSSV_HoTen
 
