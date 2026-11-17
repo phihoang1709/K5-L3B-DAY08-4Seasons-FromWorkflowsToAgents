@@ -29,8 +29,14 @@ ones. `lab8.trace.Trace` does this; your own tracer is fine if it matches.
 
 from __future__ import annotations
 
-from lab8.schemas import RunResult
-from lab8.shapes.common import not_implemented
+import sqlite3
+
+from lab8.db import connect
+from lab8.durability import InjectedCrash, issue_refund
+from lab8.schemas import Budget, RunResult, make_run_id
+from lab8.shapes.common import finish, safe_dump
+from lab8.tools import compute_compensation, get_claim_view, lookup_order, tool_cost
+from lab8.trace import Trace
 
 
 def run_claim(
@@ -40,7 +46,121 @@ def run_claim(
     store_path: str,
     crash_at: str | None = None,
 ) -> RunResult:
-    # TODO CP2 (student): thay stub này bằng shape workflow theo các bước ở docstring đầu file.
-    # TODO CP3 (student): truyền crash_at vào durability.issue_refund, không bắt InjectedCrash.
-    del store_path, crash_at
-    return not_implemented("workflow", claim_id, seed)
+    conn = connect(store_path)
+    try:
+        return _run(conn, claim_id, seed=seed, crash_at=crash_at)
+    finally:
+        conn.close()
+
+
+def _run(conn: sqlite3.Connection, claim_id: str, *, seed: int, crash_at: str | None) -> RunResult:
+    budget = Budget()
+    run_id = make_run_id("workflow", claim_id, seed)
+    trace = Trace(run_id)
+
+    # 1. Read the claim through the allowlisted view (no parent_secret, no raw headers).
+    budget.add_tool(tool_cost())
+    claim_view = get_claim_view(conn, claim_id)
+    trace.add("claim_view", safe_dump({"found": claim_view["found"], "claim_id": claim_view["claim_id"]}))
+    if not claim_view["found"]:
+        trace.add("error", {"reason": "unknown_claim"})
+        return finish(
+            conn,
+            shape="workflow",
+            claim_id=claim_id,
+            seed=seed,
+            status="failed",
+            proposal_amount=0,
+            budget=budget,
+            trace=trace,
+            error_reason="unknown_claim",
+        )
+
+    # 2. Missing order_id -> needs_info. Do not write the ledger.
+    if not claim_view["order_id"]:
+        trace.add("decision", {"status": "needs_info"})
+        return finish(
+            conn,
+            shape="workflow",
+            claim_id=claim_id,
+            seed=seed,
+            status="needs_info",
+            proposal_amount=0,
+            budget=budget,
+            trace=trace,
+            error_reason="missing_order_id",
+        )
+
+    # 3. Ownership + visibility via the read tool. The allowlisted order view is safe to trace.
+    budget.add_tool(tool_cost())
+    order_view = lookup_order(conn, claim_view["order_id"], claim_view["principal_id"])
+    trace.add("order_view", safe_dump(order_view))
+    if not order_view["visible"]:
+        trace.add("decision", {"status": "escalated"})
+        return finish(
+            conn,
+            shape="workflow",
+            claim_id=claim_id,
+            seed=seed,
+            status="escalated",
+            proposal_amount=0,
+            budget=budget,
+            trace=trace,
+            error_reason=order_view["reason"],
+        )
+
+    # 4. Quote from the order row. Ticket text never enters the money path.
+    budget.add_tool(tool_cost())
+    quote_payload = compute_compensation(conn, order_view["order"])
+    proposal = int(quote_payload["amount_vnd"])
+    trace.add("quote", safe_dump(quote_payload))
+    trace.add("decision", {"status": "denied" if proposal <= 0 else "refund"})
+
+    # 5. Quote 0 -> denied without touching the ledger.
+    if proposal <= 0:
+        return finish(
+            conn,
+            shape="workflow",
+            claim_id=claim_id,
+            seed=seed,
+            status="denied",
+            proposal_amount=0,
+            budget=budget,
+            trace=trace,
+            error_reason=quote_payload["reason"],
+        )
+
+    # 6. Full quote to the host; it checks approval and subtracts prior per-order refunds.
+    try:
+        outcome = issue_refund(conn, claim_id, proposal, crash_at=crash_at)
+    except InjectedCrash:
+        trace.add("crash", {"at": crash_at})
+        trace.write()
+        raise
+
+    if not outcome["ok"]:
+        status = "failed" if outcome["conflict"] else "denied"
+        return finish(
+            conn,
+            shape="workflow",
+            claim_id=claim_id,
+            seed=seed,
+            status=status,
+            proposal_amount=proposal,
+            budget=budget,
+            trace=trace,
+            error_reason=outcome["reason"],
+        )
+
+    # 7. Success (or idempotent replay after retry/resume): one ledger row, one committed audit.
+    return finish(
+        conn,
+        shape="workflow",
+        claim_id=claim_id,
+        seed=seed,
+        status="resolved",
+        proposal_amount=proposal,
+        budget=budget,
+        trace=trace,
+        error_reason=None,
+    )
