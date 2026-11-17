@@ -7,7 +7,7 @@ Tối đa 5 trang ngoài phụ lục. Số liệu lấy từ file trong `src/rep
 - Tên nhóm: 4Seasons
 - Lớp: L3B
 - Repo nhóm: `https://github.com/phihoang1709/K5-L3B-DAY08-4Seasons-FromWorkflowsToAgents`
-- Thành viên: xem `TEAM.md` (Nguyễn Phi Hoàng - 2A202603952, Trần Xuân Lộc - 2A202603951, Nguyễn Công Hoàn - 2A202603972)
+- Thành viên: xem `TEAM.md` (Nguyễn Phi Hoàng - 2A202603952, Quách Ngọc Huy - 2A202603956, Trần Xuân Lộc - 2A202603951, Nguyễn Công Hoàn - 2A202603972)
 - Commit chốt (trùng `report/team/decision_adr.md`): `631fe8a`
 
 ## 2. Mục tiêu và cách tiếp cận
@@ -82,8 +82,9 @@ Dữ liệu trích xuất trực tiếp từ `src/reports/benchmark.json`:
 
 Chi tiết đóng góp của từng thành viên nằm trong `TEAM.md` (bảng đóng góp) và báo cáo cá nhân:
 - Nguyễn Phi Hoàng: `report/team/2A202603952_NguyenPhiHoang.md` (Workflow Shape A, Integration, Crash safety report).
+- Quách Ngọc Huy: `report/team/2A202603956_QuachNgocHuy.md` (Single Agent Shape B).
 - Trần Xuân Lộc: `report/team/2A202603951_TranXuanLoc.md` (Orchestrator Shape C, Handoff & Investigator security).
-- Nguyễn Công Hoàn: `report/team/2A202603972_NguyenCongHoan.md` (Evaluation, Benchmark, Testing & Research Lead).
+- Nguyễn Công Hoàn: `report/team/2A202603972_NguyenCongHoan.md` (Evaluation, Benchmark, Testing & Research).
 
 ## 7. Hạn chế và hướng cải thiện
 
