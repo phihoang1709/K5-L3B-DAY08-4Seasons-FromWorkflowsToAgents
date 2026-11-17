@@ -5,7 +5,7 @@
 - Tên nhóm: 4Seasons
 - Lớp: L3B
 - Repo nhóm: `https://github.com/phihoang1709/K5-L3B-DAY08-4Seasons-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+- URL repo, nhánh nộp, commit chốt: https://github.com/phihoang1709/K5-L3B-DAY08-4Seasons-FromWorkflowsToAgents, main, 76357e8
 
 ## Thành viên
 
