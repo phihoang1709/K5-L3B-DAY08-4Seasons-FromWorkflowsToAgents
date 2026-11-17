@@ -2,20 +2,20 @@
 
 ## 1. Thông tin thành viên
 
-- Họ tên: 
+- Họ tên: Nguyễn Công Hoàn
 - MSSV: 2A202603972
 - Lớp: L3B
-- Email: 
-- GitHub: 
+- Email: 26ai.hoannc@vinuni.edu.vn
+- GitHub: hoan11052004
 
 ## 2. Phần việc phụ trách
 
 Em phụ trách vai trò **Evaluation, Benchmark, Testing & Research Lead** của nhóm:
 
-- Thiết lập kế hoạch và thực hiện toàn bộ quy trình kiểm thử (Testing), đo lường chuẩn hóa (Benchmark) và đánh giá độ bền vững (Durability & Crash Safety) trên cả 4 kiến trúc (*shapes*): `workflow`, `single`, `orchestrator`, `swarm`.
+- Thiết lập kế hoạch và thực hiện quy trình kiểm thử (Testing), đo lường chuẩn hóa (Benchmark) và đánh giá độ bền vững (Durability & Crash Safety) trên cả 4 kiến trúc (*shapes*): `workflow`, `single`, `orchestrator`, `swarm`.
 - Thực hiện kiểm chứng cổng host gate (`pytest -q`), ma trận kiểm thử sinh viên T01–T14 (`pytest -m student`) và bộ kịch bản sự cố crash suite 20 điểm (`lab8.crash_test`).
-- Tổ chức chạy benchmark 4 shapes × 5 seeds trên 14 claims public, trích xuất dữ liệu và phân tích chuyên sâu các metrics: Pass rate, Pass^5, Seed variance, Cost per success, Mean/p95 steps, Secret leakage và Approval bypass.
-- Hoàn thiện tài liệu ra quyết định kiến trúc (`report/team/decision_adr.md`), phiếu nghiên cứu lỗi đa tác nhân (`report/team/research_card.md`), đồng thời tích hợp bảng số liệu thực nghiệm vào báo cáo nhóm (`report/team/group_report.md`).
+- chạy benchmark 4 shapes × 5 seeds trên 14 claims public, trích xuất dữ liệu và phân tích chuyên sâu các metrics: Pass rate, Pass^5, Seed variance, Cost per success, Mean/p95 steps, Secret leakage và Approval bypass.
+- Hoàn thiện tài liệu (`report/team/decision_adr.md`), phiếu (`report/team/research_card.md`), đồng thời tích hợp bảng số liệu thực nghiệm vào báo cáo nhóm (`report/team/group_report.md`).
 - Chạy công cụ kiểm tra hợp lệ nộp bài `python -m lab8.check_submission`, đưa toàn bộ dự án về trạng thái **0 FAIL, 0 WARN**.
 
 ## 3. Đóng góp cụ thể
@@ -75,9 +75,9 @@ Toàn bộ các lệnh kiểm tra và đo lường được thực thi trực ti
 ## 6. Tự đánh giá
 
 - **Điểm làm tốt:**
-  - Tổ chức thực thi kiểm thử và benchmark bài bản, kiểm soát trọn vẹn 280 trials và 248 student tests mà không gặp lỗi dừng đột ngột.
+  - Kiểm thử và benchmark bài bản, kiểm soát trọn vẹn 280 trials và 248 student tests mà không gặp lỗi dừng đột ngột.
   - Phân tích sâu sắc bản chất toán học của các chỉ số (Pass rate, Pass^5, phương sai seed, cost/success) và cơ chế phát sinh lỗi của Swarm tại seed 55, làm nổi bật tính thuyết phục của quyết định lựa chọn Workflow trong ADR.
   - Đưa toàn bộ dự án về trạng thái hoàn hảo `0 FAIL, 0 WARN` trên hệ thống kiểm tra tự động `check_submission`.
 - **Điểm còn hạn chế / Bài học kinh nghiệm:**
   - Trong quá trình chạy ban đầu trên môi trường Windows, cần chú ý luôn kích hoạt và sử dụng Python trong virtual environment (`.\.venv\Scripts\python.exe`) để tránh việc trình thông dịch nhận nhầm module `conftest` từ global site-packages.
-- **Thời gian thực tế dành cho phần việc:** Khoảng 2 giờ (chạy benchmark, kiểm thử ma trận, phân tích dữ liệu và hoàn thiện hồ sơ báo cáo).
+- **Thời gian thực tế dành cho phần việc:** Khoảng 1 giờ (chạy benchmark, kiểm thử ma trận, phân tích dữ liệu và hoàn thiện hồ sơ báo cáo).
